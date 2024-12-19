@@ -1,6 +1,6 @@
 import { Types } from "mongoose";
 
-export type blogSchema = {
+export type TBlog = {
     title: string;
     content: string;
     author: Types.ObjectId;
