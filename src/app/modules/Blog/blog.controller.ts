@@ -1,4 +1,4 @@
-import { Request, RequestHandler, Response } from 'express';
+import { RequestHandler } from 'express';
 import { BlogServices } from './blog.service';
 import { sendResponse } from '../../utils/sendResponse';
 import { catchAsync } from '../../utils/catchAsync';
@@ -26,7 +26,7 @@ const getAllBlogs: RequestHandler = catchAsync(async (req, res) => {
 })
 
 const updateBlog: RequestHandler = catchAsync(async (req, res) => {
-    const blogId = req.params.blogId;
+    const blogId = req.params.id;
     const updatedData = req.body;
     const result = await BlogServices.updateBlogIntoDB(blogId, updatedData);
 
@@ -39,7 +39,7 @@ const updateBlog: RequestHandler = catchAsync(async (req, res) => {
 })
 
 const deleteBlog: RequestHandler = catchAsync(async (req, res) => {
-    const blogId = req.params.blogId;
+    const blogId = req.params.id;
     await BlogServices.deleteBlogFromDB(blogId,)
 
     sendResponse(res, {
