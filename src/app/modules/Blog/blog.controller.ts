@@ -25,7 +25,20 @@ const getAllBlogs: RequestHandler = catchAsync(async (req, res) => {
     })
 })
 
+const deleteBlog: RequestHandler = catchAsync(async (req, res) => {
+    const blogId = req.params.blogId;
+    await BlogServices.deleteBlogFromDB(blogId,)
+
+    sendResponse(res, {
+        statusCode: 200,
+        success: true,
+        message: "Blog deleted successfully",
+        data: null,
+    })
+})
+
 export const BlogControllers = {
     createBlog,
     getAllBlogs,
+    deleteBlog,
 };
