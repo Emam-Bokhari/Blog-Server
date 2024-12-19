@@ -26,4 +26,28 @@ const blogSchema = new Schema<TBlog>(
   { timestamps: true },
 );
 
+// query middleware
+blogSchema.pre("find", async function (next) {
+  this.find({ isDeleted: { $ne: true } })
+
+  next()
+
+})
+
+blogSchema.pre("findOne", async function (next) {
+  this.findOne({ isDeleted: { $ne: true } })
+  next()
+})
+
+// aggregate middleware
+blogSchema.pre("aggregate", async function (next) {
+  this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } })
+  next()
+})
+
+blogSchema.pre("aggregate", async function (next) {
+  this.pipeline().unshift({ $project: { isDeleted: 0 } });
+  next()
+})
+
 export const Blog = model('Blog', blogSchema);
