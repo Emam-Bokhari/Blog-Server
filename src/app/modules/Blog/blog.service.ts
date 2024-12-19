@@ -7,6 +7,7 @@ const createBlogIntoDB = async (payload: TBlog) => {
 }
 
 
-const BlogServices = {
+
+export const BlogServices = {
     createBlogIntoDB,
 }
