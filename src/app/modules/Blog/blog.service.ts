@@ -17,9 +17,15 @@ const updateBlogIntoDB = async (blogId: string, payload: Partial<TBlog>) => {
     return result;
 }
 
+const deleteBlogFromDB = async (blogId: string) => {
+    const result = await Blog.findByIdAndUpdate(blogId, { isDeleted: true }, { new: true, runValidators: true });
+
+    return result;
+}
 
 export const BlogServices = {
     createBlogIntoDB,
     getAllBlogsFromDB,
     updateBlogIntoDB,
+    deleteBlogFromDB,
 };

@@ -18,6 +18,10 @@ const blogSchema = new Schema<TBlog>(
       required: true,
       // ref: "users"
     },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    }
   },
   { timestamps: true },
 );

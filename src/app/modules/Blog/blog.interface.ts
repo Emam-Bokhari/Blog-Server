@@ -4,4 +4,5 @@ export type TBlog = {
   title: string;
   content: string;
   author: Types.ObjectId;
+  isDeleted: boolean;
 };
