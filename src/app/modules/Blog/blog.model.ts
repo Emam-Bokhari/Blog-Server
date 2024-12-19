@@ -1,6 +1,7 @@
 import { model, Schema } from 'mongoose';
 import { TBlog } from './blog.interface';
 
+
 const blogSchema = new Schema<TBlog>(
   {
     title: {
@@ -54,4 +55,4 @@ blogSchema.pre("aggregate", async function (next) {
   next()
 })
 
-export const Blog = model('Blog', blogSchema);
+export const Blog = model<TBlog>('Blog', blogSchema);
