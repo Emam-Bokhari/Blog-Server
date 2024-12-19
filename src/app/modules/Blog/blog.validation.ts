@@ -5,6 +5,7 @@ const createBlogValidationSchema = z.object({
     title: z.string({ required_error: 'Title is required!' }),
     content: z.string({ required_error: 'Content is required!' }),
     author: z.string({ required_error: 'Author ID is required!' }),
+    isPublished: z.boolean().default(true),
     isDeleted: z.boolean().default(false),
   }),
 });
@@ -14,7 +15,8 @@ const updateBlogValidationSchema = z.object({
     title: z.string({ required_error: 'Title is required!' }).optional(),
     content: z.string({ required_error: 'Content is required!' }).optional(),
     author: z.string({ required_error: 'Author ID is required!' }).optional(),
-    isDeleted: z.boolean().default(false),
+    isPublished: z.boolean().default(true).optional(),
+    isDeleted: z.boolean().default(false).optional(),
   }),
 });
 

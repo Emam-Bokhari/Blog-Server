@@ -18,6 +18,10 @@ const blogSchema = new Schema<TBlog>(
       required: true,
       // ref: "users"
     },
+    isPublished: {
+      type: Boolean,
+      default: true,
+    },
     isDeleted: {
       type: Boolean,
       default: false,
