@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
+import { Request, RequestHandler, Response } from 'express';
 import { BlogServices } from './blog.service';
 import { sendResponse } from '../../utils/sendResponse';
 import { catchAsync } from '../../utils/catchAsync';
 
-const createBlog = catchAsync(async (req: Request, res: Response) => {
+const createBlog: RequestHandler = catchAsync(async (req, res) => {
     const result = await BlogServices.createBlogIntoDB(req.body);
 
     sendResponse(res, {
@@ -14,6 +14,18 @@ const createBlog = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const getAllBlogs: RequestHandler = catchAsync(async (req, res) => {
+    const result = await BlogServices.getAllBlogsFromDB();
+
+    sendResponse(res, {
+        statusCode: 200,
+        success: true,
+        message: "Blogs fetched successfully",
+        data: result,
+    })
+})
+
 export const BlogControllers = {
     createBlog,
+    getAllBlogs,
 };
