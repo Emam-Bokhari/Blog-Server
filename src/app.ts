@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 // application routes
-app.use("/api/blogs", BlogRoutes)
+app.use('/api/blogs', BlogRoutes);
 
 // check server health
 app.use('/', (req, res) => {
