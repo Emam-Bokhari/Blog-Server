@@ -53,14 +53,21 @@ export const globalErrorHandler = ((err: any, req: Request, res: Response, next:
                 message: err?.message
             }
         ]
+    } else if (err instanceof Error) {
+        error = [
+            {
+                path: "",
+                message: err?.message
+            }
+        ]
     }
 
 
     return res.status(statusCode).json({
         success: false,
         message: message,
+        statusCode: statusCode,
         error: error,
-        err: err,
         stack: config.node_env === "development" ? err?.stack : null,
     })
 
