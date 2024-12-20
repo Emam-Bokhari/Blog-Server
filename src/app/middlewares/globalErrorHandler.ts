@@ -9,6 +9,7 @@ import { handleZodError } from "../errors/handleZodError";
 import { handleDuplicateError } from "../errors/handleDuplicateError";
 import { handleValidationError } from "../errors/handleValidationError";
 import { handleCastError } from "../errors/handleCastError";
+import { AppError } from "../errors/AppError";
 
 export const globalErrorHandler = ((err: any, req: Request, res: Response, next: NextFunction) => {
     let statusCode = err.statusCode || 500;
@@ -43,6 +44,15 @@ export const globalErrorHandler = ((err: any, req: Request, res: Response, next:
         statusCode = simplifiedError?.statusCode;
         message = simplifiedError?.message;
         error = simplifiedError?.error
+    } else if (err instanceof AppError) {
+        statusCode = err?.statusCode;
+        message = err?.message;
+        error = [
+            {
+                path: "",
+                message: err?.message
+            }
+        ]
     }
 
 
