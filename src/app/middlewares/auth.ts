@@ -11,7 +11,7 @@ export const auth = (...requiredRoles: TUserRole[]) => {
         const token = req.headers.authorization;
         // console.log(token);
         if (!token) {
-            throw new AppError(401, "You are unAthorized!")
+            throw new AppError(401, "Invalid credentials")
         }
 
         // decoded token
@@ -32,7 +32,7 @@ export const auth = (...requiredRoles: TUserRole[]) => {
         }
 
         if (requiredRoles && !requiredRoles.includes(role)) {
-            throw new AppError(401, "You are unAthorized!")
+            throw new AppError(401, "Invalid credentials")
         }
 
         req.user = decoded as JwtPayload
