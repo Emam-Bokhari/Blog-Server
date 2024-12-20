@@ -8,7 +8,13 @@ import { User } from "../modules/User/user.model";
 
 export const auth = (...requiredRoles: TUserRole[]) => {
     return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-        const token = req.headers.authorization;
+        const authHeader = req.headers.authorization;
+
+        if (!authHeader || !authHeader.startsWith("Bearer")) {
+            throw new AppError(401, "Invalid Credentials");
+        }
+
+        const token = authHeader.split(" ")[1];
         // console.log(token);
         if (!token) {
             throw new AppError(401, "Invalid credentials")
