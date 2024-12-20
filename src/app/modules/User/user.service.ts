@@ -1,6 +1,8 @@
+import config from "../../config";
 import { AppError } from "../../errors/AppError";
-import { TUser } from "./user.interface";
+import { TLoginUser, TUser } from "./user.interface";
 import { User } from "./user.model"
+import jwt from "jsonwebtoken";
 
 const registerUserIntoDB = async (payload: TUser) => {
 
@@ -17,6 +19,40 @@ const registerUserIntoDB = async (payload: TUser) => {
     return result;
 }
 
+const loginUser = async (payload: TLoginUser) => {
+    const user = await User.isUserExists(payload?.email)
+
+    // check if the use is exists
+    if (!user) {
+        throw new AppError(404, "The user is not found!")
+    };
+
+    // check if the use is blocked
+    if (user.isBlocked === true) {
+        throw new AppError(403, "The use is blocked!")
+    }
+
+    // check if the password is matched
+    if (!(await User.isPasswordMatched(payload?.password, user?.password))) {
+        throw new AppError(403, "Password is incorrect!")
+    }
+
+    // create token
+
+    const jwtPayload = {
+        email: user?.email,
+        password: user?.password,
+    }
+    console.log(jwtPayload, "jwtpayload")
+
+    const token = jwt.sign(jwtPayload, config.access_token_secret as string, { expiresIn: config.access_token_expires_in });
+
+    return {
+        token
+    }
+}
+
 export const UserServices = {
-    registerUserIntoDB
+    registerUserIntoDB,
+    loginUser,
 }
