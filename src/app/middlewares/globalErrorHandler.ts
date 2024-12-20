@@ -6,6 +6,7 @@ import express from 'express';
 import { ZodError } from "zod";
 import { handleZodError } from "../errors/handleZodError";
 import { handleDuplicateError } from "../errors/handleDuplicateError";
+import { handleValidationError } from "../errors/handleValidationError";
 
 export const globalErrorHandler = ((err: any, req: Request, res: Response, next: NextFunction) => {
     let statusCode = err.statusCode || 500;
@@ -28,6 +29,12 @@ export const globalErrorHandler = ((err: any, req: Request, res: Response, next:
         statusCode = simplifiedError?.statusCode;
         message = simplifiedError?.message;
         error = simplifiedError?.error;
+    } else if (err?.name === "ValidationError") {
+        const simplifiedError = handleValidationError(err);
+
+        statusCode = simplifiedError?.statusCode;
+        message = simplifiedError?.message;
+        error = simplifiedError?.error
     }
 
 
