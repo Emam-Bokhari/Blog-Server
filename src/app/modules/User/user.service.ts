@@ -1,5 +1,6 @@
 import config from "../../config";
 import { AppError } from "../../errors/AppError";
+import { Blog } from "../Blog/blog.model";
 import { TLoginUser, TUser } from "./user.interface";
 import { User } from "./user.model"
 import jwt from "jsonwebtoken";
@@ -63,8 +64,15 @@ const blockUserIntoDB = async (userId: string, payload: Partial<TUser>) => {
     return result;
 }
 
+const deleteBlogFromDB = async (id: string) => {
+    const result = await Blog.findByIdAndUpdate(id, { isDeleted: true });
+
+    return result;
+}
+
 export const UserServices = {
     registerUserIntoDB,
     loginUser,
     blockUserIntoDB,
+    deleteBlogFromDB,
 }
