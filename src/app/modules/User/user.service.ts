@@ -54,7 +54,17 @@ const loginUser = async (payload: TLoginUser) => {
     }
 }
 
+const blockUserIntoDB = async (id: string) => {
+
+    // TODO: check all validations
+
+    const result = await User.findByIdAndUpdate(id, { isBlocked: true }, { new: true, runValidators: true });
+
+    return result;
+}
+
 export const UserServices = {
     registerUserIntoDB,
     loginUser,
+    blockUserIntoDB,
 }
