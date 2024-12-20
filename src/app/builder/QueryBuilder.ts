@@ -31,6 +31,11 @@ export class QueryBuilder<T> {
 
         excludeFields?.forEach((el) => delete queryObj[el]);
 
+        if (queryObj?.filter) {
+            this.modelQuery = this.modelQuery.find({ author: queryObj.filter })
+            delete queryObj.filter
+        }
+
         this.modelQuery = this.modelQuery.find(queryObj as FilterQuery<T>)
 
         return this;
