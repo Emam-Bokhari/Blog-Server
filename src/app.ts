@@ -10,13 +10,14 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.get('/', (req, res) => {
+  res.send('Server is running...');
+});
+
 // application routes
 app.use('/api', router);
 
 // check server health
-app.use('/health', (req, res) => {
-  res.send('Server is running...');
-});
 
 // global error handler
 app.use(globalErrorHandler);
