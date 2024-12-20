@@ -30,12 +30,12 @@ const loginUser = async (payload: TLoginUser) => {
 
     // check if the use is blocked
     if (user.isBlocked === true) {
-        throw new AppError(403, "The use is blocked!")
+        throw new AppError(403, "Your account has been blocked.")
     }
 
     // check if the password is matched
     if (!(await User.isPasswordMatched(payload?.password, user?.password))) {
-        throw new AppError(403, "Password is incorrect!")
+        throw new AppError(401, "Invalid credentials!")
     }
 
     // create token

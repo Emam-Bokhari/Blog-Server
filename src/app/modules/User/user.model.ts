@@ -6,18 +6,18 @@ import config from '../../config';
 export const userSchema = new Schema<TUser, UserModel>({
     name: {
         type: String,
-        required: true,
+        required: [true, "Name is required. Please provide the necessary information."],
         trim: true,
     },
     email: {
         type: String,
-        required: true,
+        required: [true, "Email is required. Please provide the necessary information."],
         trim: true,
         unique: true,
     },
     password: {
         type: String,
-        required: true,
+        required: [true, "Password is required."],
         trim: true,
         select: 0,
     },

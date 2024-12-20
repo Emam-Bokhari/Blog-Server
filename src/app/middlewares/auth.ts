@@ -28,11 +28,11 @@ export const auth = (...requiredRoles: TUserRole[]) => {
 
         // check if the user is blocked
         if (user.isBlocked === true) {
-            throw new AppError(403, "Ths user is blocked!")
+            throw new AppError(403, "Your account has been blocked.")
         }
 
         if (requiredRoles && !requiredRoles.includes(role)) {
-            throw new AppError(401, "Invalid credentials")
+            throw new AppError(403, "Insufficient permissions")
         }
 
         req.user = decoded as JwtPayload

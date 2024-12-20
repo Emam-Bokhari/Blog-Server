@@ -6,17 +6,17 @@ const blogSchema = new Schema<TBlog>(
   {
     title: {
       type: String,
-      required: true,
+      required: [true, "Title is required. Please provide the necessary information."],
       trim: true,
     },
     content: {
       type: String,
-      required: true,
+      required: [true, "Content is required. Please provide the necessary information."],
       trim: true,
     },
     author: {
       type: Schema.ObjectId,
-      required: true,
+      required: [true, "Author ID is required"],
       ref: "User"
     },
     isPublished: {
