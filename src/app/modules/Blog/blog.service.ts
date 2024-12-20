@@ -20,6 +20,7 @@ const getAllBlogsFromDB = async (query: Record<string, unknown>) => {
 
 const updateBlogIntoDB = async (id: string, userEmail: string, payload: Partial<TBlog>) => {
 
+    // check user is exists
     const user = await User.isUserExists(userEmail);
 
     if (!user) {

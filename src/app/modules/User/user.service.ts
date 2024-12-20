@@ -57,7 +57,18 @@ const loginUser = async (payload: TLoginUser) => {
 
 const blockUserIntoDB = async (userId: string, payload: Partial<TUser>) => {
 
-    // TODO: check all validations
+    // check user is exits
+    const user = await User.findOne({ _id: userId });
+
+    if (!user) {
+        throw new AppError(404, "User not found!")
+    }
+
+    // check thre role is user
+    if (user?.role !== "user") {
+        throw new AppError(403, "Only 'user' roles can be blocked!")
+    }
+
 
     const result = await User.findByIdAndUpdate(userId, payload, { new: true, runValidators: true });
 
@@ -65,6 +76,14 @@ const blockUserIntoDB = async (userId: string, payload: Partial<TUser>) => {
 }
 
 const deleteBlogFromDB = async (id: string) => {
+
+    // check blog is exists
+    const blog = await Blog.findById(id);
+
+    if (!blog) {
+        throw new AppError(404, "Blog not found!")
+    }
+
     const result = await Blog.findByIdAndUpdate(id, { isDeleted: true });
 
     return result;
