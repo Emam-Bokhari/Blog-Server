@@ -3,7 +3,7 @@ import app from './app';
 import config from './app/config';
 import { Server } from 'http';
 
-let server: Server
+let server: Server;
 
 async function main() {
   try {
@@ -18,22 +18,20 @@ async function main() {
 
 main();
 
-
 // asynchronous
-process.on("unhandledRejection", () => {
+process.on('unhandledRejection', () => {
   console.log(`👿 unhandledRejection is detected, shutting down...`);
   if (server) {
     server.close(() => {
-      process.exit(1)
-    })
+      process.exit(1);
+    });
   }
   process.exit(1);
-})
-
+});
 
 // synchoronous
-process.on("uncaughtException", () => {
+process.on('uncaughtException', () => {
   console.log(`👿 uncaughtExecption is detected, shutting down...`);
 
   process.exit(1);
-})
+});

@@ -1,23 +1,27 @@
 import { model, Schema } from 'mongoose';
 import { TBlog } from './blog.interface';
 
-
 const blogSchema = new Schema<TBlog>(
   {
     title: {
       type: String,
-      required: [true, "Title is required. Please provide the necessary information."],
+      required: [
+        true,
+        'Title is required. Please provide the necessary information.',
+      ],
       trim: true,
     },
     content: {
       type: String,
-      required: [true, "Content is required. Please provide the necessary information."],
+      required: [
+        true,
+        'Content is required. Please provide the necessary information.',
+      ],
       trim: true,
     },
     author: {
       type: Schema.ObjectId,
-      required: [true, "Author ID is required"],
-      ref: "User"
+      ref: 'User',
     },
     isPublished: {
       type: Boolean,
@@ -26,33 +30,32 @@ const blogSchema = new Schema<TBlog>(
     isDeleted: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   { timestamps: true },
 );
 
 // query middleware
-blogSchema.pre("find", async function (next) {
-  this.find({ isDeleted: { $ne: true } })
+blogSchema.pre('find', async function (next) {
+  this.find({ isDeleted: { $ne: true } });
 
-  next()
+  next();
+});
 
-})
-
-blogSchema.pre("findOne", async function (next) {
-  this.findOne({ isDeleted: { $ne: true } })
-  next()
-})
+blogSchema.pre('findOne', async function (next) {
+  this.findOne({ isDeleted: { $ne: true } });
+  next();
+});
 
 // aggregate middleware
-blogSchema.pre("aggregate", async function (next) {
-  this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } })
-  next()
-})
+blogSchema.pre('aggregate', async function (next) {
+  this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } });
+  next();
+});
 
-blogSchema.pre("aggregate", async function (next) {
+blogSchema.pre('aggregate', async function (next) {
   this.pipeline().unshift({ $project: { isDeleted: 0 } });
-  next()
-})
+  next();
+});
 
 export const Blog = model<TBlog>('Blog', blogSchema);

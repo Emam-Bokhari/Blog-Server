@@ -4,7 +4,6 @@ import { router } from './app/routes';
 import { globalErrorHandler } from './app/middlewares/globalErrorHandler';
 import { notFound } from './app/middlewares/notFound';
 
-
 const app = express();
 
 // parser
@@ -20,9 +19,9 @@ app.use('/health', (req, res) => {
 });
 
 // global error handler
-app.use(globalErrorHandler)
+app.use(globalErrorHandler);
 
 // not found route error handler
-app.use(notFound)
+app.use(notFound);
 
 export default app;

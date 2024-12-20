@@ -7,12 +7,22 @@ import { blogValidationSchema } from './blog.validation';
 
 const router = express.Router();
 
-router.post('/', auth(USER_ROLE.user), validateRequest(blogValidationSchema.createBlogValidationSchema), BlogControllers.createBlog);
+router.post(
+  '/',
+  auth(USER_ROLE.user),
+  validateRequest(blogValidationSchema.createBlogValidationSchema),
+  BlogControllers.createBlog,
+);
 
-router.get("/", BlogControllers.getAllBlogs);
+router.get('/', BlogControllers.getAllBlogs);
 
-router.patch("/:id", auth(USER_ROLE.user), validateRequest(blogValidationSchema.updateBlogValidationSchema), BlogControllers.updateBlog);
+router.patch(
+  '/:id',
+  auth(USER_ROLE.user),
+  validateRequest(blogValidationSchema.updateBlogValidationSchema),
+  BlogControllers.updateBlog,
+);
 
-router.delete("/:id", auth(USER_ROLE.user), BlogControllers.deleteBlog)
+router.delete('/:id', auth(USER_ROLE.user), BlogControllers.deleteBlog);
 
 export const BlogRoutes = router;

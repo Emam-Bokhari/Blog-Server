@@ -4,62 +4,66 @@ import { sendResponse } from '../../utils/sendResponse';
 import { catchAsync } from '../../utils/catchAsync';
 
 const createBlog: RequestHandler = catchAsync(async (req, res) => {
-    const result = await BlogServices.createBlogIntoDB(req.body);
+  const userEmail = req?.user?.email;
 
-    sendResponse(res, {
-        statusCode: 201,
-        success: true,
-        message: 'Blog created successfully',
-        data: result,
-    });
+  const result = await BlogServices.createBlogIntoDB(req.body, userEmail);
+
+  sendResponse(res, {
+    statusCode: 201,
+    success: true,
+    message: 'Blog created successfully',
+    data: result,
+  });
 });
 
 const getAllBlogs: RequestHandler = catchAsync(async (req, res) => {
-    const query = req.query;
-    // console.log(query);
-    const result = await BlogServices.getAllBlogsFromDB(query);
+  const query = req.query;
+  // console.log(query);
+  const result = await BlogServices.getAllBlogsFromDB(query);
 
-    sendResponse(res, {
-        statusCode: 200,
-        success: true,
-        message: "Blogs fetched successfully",
-        data: result,
-    })
-})
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Blogs fetched successfully',
+    data: result,
+  });
+});
 
 const updateBlog: RequestHandler = catchAsync(async (req, res) => {
-    const id = req.params.id;
-    const updatedData = req.body;
-    const userEmail = req?.user?.email;
+  const id = req.params.id;
+  const updatedData = req.body;
+  const userEmail = req?.user?.email;
 
+  const result = await BlogServices.updateBlogIntoDB(
+    id,
+    userEmail,
+    updatedData,
+  );
 
-
-    const result = await BlogServices.updateBlogIntoDB(id, userEmail, updatedData);
-
-    sendResponse(res, {
-        statusCode: 200,
-        success: true,
-        message: "Blog updated successfully",
-        data: result,
-    })
-})
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Blog updated successfully',
+    data: result,
+  });
+});
 
 const deleteBlog: RequestHandler = catchAsync(async (req, res) => {
-    const id = req.params.id;
-    const userEmail = req?.user?.email;
-    await BlogServices.deleteBlogFromDB(id, userEmail)
+  const id = req.params.id;
+  const userEmail = req?.user?.email;
+  await BlogServices.deleteBlogFromDB(id, userEmail);
 
-    sendResponse(res, {
-        statusCode: 200,
-        success: true,
-        message: "Blog deleted successfully",
-        data: {},
-    })
-})
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Blog deleted successfully',
+    data: {},
+  });
+});
 
 export const BlogControllers = {
-    createBlog,
-    getAllBlogs,
-    updateBlog,
-    deleteBlog,
+  createBlog,
+  getAllBlogs,
+  updateBlog,
+  deleteBlog,
 };
