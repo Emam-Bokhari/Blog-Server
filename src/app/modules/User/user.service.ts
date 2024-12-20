@@ -10,9 +10,9 @@ const registerUserIntoDB = async (payload: TUser) => {
     // check if the email is already save the database
     const user = await User.isUserExists(payload?.email);
 
-    if (user) {
-        throw new AppError(400, "Email is already exists!")
-    }
+    // if (user) {
+    //     throw new AppError(400, "Email is already exists!")
+    // }
 
 
     const result = await User.create(payload);

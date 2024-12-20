@@ -5,6 +5,7 @@ import config from "../config";
 import express from 'express';
 import { ZodError } from "zod";
 import { handleZodError } from "../errors/handleZodError";
+import { handleDuplicateError } from "../errors/handleDuplicateError";
 
 export const globalErrorHandler = ((err: any, req: Request, res: Response, next: NextFunction) => {
     let statusCode = err.statusCode || 500;
@@ -17,6 +18,12 @@ export const globalErrorHandler = ((err: any, req: Request, res: Response, next:
 
     if (err instanceof ZodError) {
         const simplifiedError = handleZodError(err)
+
+        statusCode = simplifiedError?.statusCode;
+        message = simplifiedError?.message;
+        error = simplifiedError?.error;
+    } else if (err?.code === 11000) {
+        const simplifiedError = handleDuplicateError(err);
 
         statusCode = simplifiedError?.statusCode;
         message = simplifiedError?.message;
