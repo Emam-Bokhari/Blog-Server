@@ -54,11 +54,11 @@ const loginUser = async (payload: TLoginUser) => {
     }
 }
 
-const blockUserIntoDB = async (id: string) => {
+const blockUserIntoDB = async (id: string, payload: Partial<TUser>) => {
 
     // TODO: check all validations
 
-    const result = await User.findByIdAndUpdate(id, { isBlocked: true }, { new: true, runValidators: true });
+    const result = await User.findByIdAndUpdate(id, payload, { new: true, runValidators: true });
 
     return result;
 }

@@ -30,7 +30,22 @@ const loginUser: RequestHandler = catchAsync(async (req, res) => {
     })
 })
 
+
+const blockUser: RequestHandler = catchAsync(async (req, res) => {
+    const id = req.params.id;
+    const updatedData = req.body;
+    const result = await UserServices.blockUserIntoDB(id, updatedData);
+
+    sendResponse(res, {
+        statusCode: 200,
+        success: true,
+        message: "User blocked successfully",
+        data: result,
+    })
+})
+
 export const UserControllers = {
     registerUser,
     loginUser,
+    blockUser
 }
