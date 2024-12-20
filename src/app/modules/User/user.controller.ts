@@ -32,9 +32,9 @@ const loginUser: RequestHandler = catchAsync(async (req, res) => {
 
 
 const blockUser: RequestHandler = catchAsync(async (req, res) => {
-    const id = req.params.id;
+    const userId = req.params.userId;
     const updatedData = req.body;
-    const result = await UserServices.blockUserIntoDB(id, updatedData);
+    const result = await UserServices.blockUserIntoDB(userId, updatedData);
 
     sendResponse(res, {
         statusCode: 200,
