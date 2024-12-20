@@ -12,9 +12,19 @@ const createBlogIntoDB = async (payload: TBlog) => {
 
 const getAllBlogsFromDB = async (query: Record<string, unknown>) => {
 
+
+
     const blogQuery = new QueryBuilder(Blog.find().populate("author"), query).search(blogSearchableFields).filter().sortBy()
 
+
+
     const result = await blogQuery.modelQuery;
+
+    // check no blogs found
+    if (!result.length) {
+        throw new AppError(404, "No blogs found!")
+    }
+
     return result;
 }
 
