@@ -12,7 +12,7 @@ export interface TUser {
 
 export interface UserModel extends Model<TUser> {
     isUserExists(email: string): Promise<TUser>;
-    isPasswordMatched(plainTextPassword: string, hashPassword: string): boolean
+    isPasswordMatched(plainTextPassword: string, hashPassword: string): Promise<boolean>
 }
 
 export type TUserRole = keyof typeof USER_ROLE

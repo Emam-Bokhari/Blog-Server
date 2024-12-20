@@ -25,7 +25,6 @@ export const userSchema = new Schema<TUser, UserModel>({
         type: String,
         enum: ["admin", "user"],
         default: "user",
-        select: 0,
     },
     isBlocked: {
         type: Boolean,
@@ -46,10 +45,10 @@ userSchema.pre("save", async function (next) {
 })
 
 userSchema.statics.isUserExists = async function (email: string) {
-    return await User.findOne({ email: email })
+    return await User.findOne({ email: email }).select("+password")
 }
 
-userSchema.statics.isPasswordMatched = async function (plainTextPassword: string, hashPassword: string) {
+userSchema.statics.isPasswordMatched = async function (plainTextPassword, hashPassword) {
     return await bcrypt.compare(plainTextPassword, hashPassword)
 }
 
