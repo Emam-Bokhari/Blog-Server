@@ -44,8 +44,21 @@ const blockUser: RequestHandler = catchAsync(async (req, res) => {
     })
 })
 
+const deleteBlog: RequestHandler = catchAsync(async (req, res) => {
+    const id = req.params.id;
+    await UserServices.deleteBlogFromDB(id);
+
+    sendResponse(res, {
+        statusCode: 200,
+        success: true,
+        message: "Blog deleted successfully",
+        data: null,
+    })
+})
+
 export const UserControllers = {
     registerUser,
     loginUser,
-    blockUser
+    blockUser,
+    deleteBlog,
 }
