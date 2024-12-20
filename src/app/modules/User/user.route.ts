@@ -8,5 +8,6 @@ const router = express.Router();
 router.post("/register", UserControllers.registerUser)
 router.post("/login", UserControllers.loginUser)
 router.patch("/users/:userId/block", auth(USER_ROLE.admin), UserControllers.blockUser)
+router.delete("/blogs/:id", auth(USER_ROLE.admin), UserControllers.deleteBlog)
 
 export const UserRoutes = router;
