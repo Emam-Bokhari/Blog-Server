@@ -46,7 +46,8 @@ const updateBlog: RequestHandler = catchAsync(async (req, res) => {
 
 const deleteBlog: RequestHandler = catchAsync(async (req, res) => {
     const id = req.params.id;
-    await BlogServices.deleteBlogFromDB(id,)
+    const userEmail = req?.user?.email;
+    await BlogServices.deleteBlogFromDB(id, userEmail)
 
     sendResponse(res, {
         statusCode: 200,
