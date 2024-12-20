@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextFunction, Request, Response } from "express";
 import { TError } from "../interface/error";
 // import { handleZodError } from "../errors/handleZodError";
@@ -7,6 +8,7 @@ import { ZodError } from "zod";
 import { handleZodError } from "../errors/handleZodError";
 import { handleDuplicateError } from "../errors/handleDuplicateError";
 import { handleValidationError } from "../errors/handleValidationError";
+import { handleCastError } from "../errors/handleCastError";
 
 export const globalErrorHandler = ((err: any, req: Request, res: Response, next: NextFunction) => {
     let statusCode = err.statusCode || 500;
@@ -31,6 +33,12 @@ export const globalErrorHandler = ((err: any, req: Request, res: Response, next:
         error = simplifiedError?.error;
     } else if (err?.name === "ValidationError") {
         const simplifiedError = handleValidationError(err);
+
+        statusCode = simplifiedError?.statusCode;
+        message = simplifiedError?.message;
+        error = simplifiedError?.error
+    } else if (err?.name === "CastError") {
+        const simplifiedError = handleCastError(err)
 
         statusCode = simplifiedError?.statusCode;
         message = simplifiedError?.message;
