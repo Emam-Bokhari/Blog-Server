@@ -1,9 +1,9 @@
 import { model, Schema } from 'mongoose';
-import { TUser } from './user.interface';
+import { TUser, UserModel } from './user.interface';
 import bcrypt from "bcrypt"
 import config from '../../config';
 
-export const userSchema = new Schema<TUser>({
+export const userSchema = new Schema<TUser, UserModel>({
     name: {
         type: String,
         required: true,
@@ -19,11 +19,13 @@ export const userSchema = new Schema<TUser>({
         type: String,
         required: true,
         trim: true,
+        select: 0,
     },
     role: {
         type: String,
         enum: ["admin", "user"],
         default: "user",
+        select: 0,
     },
     isBlocked: {
         type: Boolean,
@@ -43,6 +45,10 @@ userSchema.pre("save", async function (next) {
     next()
 })
 
+userSchema.statics.isUserExists = async function (email: string) {
+    return await User.findOne({ email: email })
+}
 
 
-export const User = model<TUser>("User", userSchema);
+
+export const User = model<TUser, UserModel>("User", userSchema);

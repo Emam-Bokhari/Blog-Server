@@ -11,7 +11,7 @@ const createBlogIntoDB = async (payload: TBlog) => {
 
 const getAllBlogsFromDB = async (query: Record<string, unknown>) => {
 
-    const blogQuery = new QueryBuilder(Blog.find(), query).search(blogSearchableFields).filter().sortBy()
+    const blogQuery = new QueryBuilder(Blog.find().populate("author"), query).search(blogSearchableFields).filter().sortBy()
 
     const result = await blogQuery.modelQuery;
     return result;
