@@ -65,6 +65,10 @@ const blockUserIntoDB = async (userId: string, payload: Partial<TUser>) => {
     throw new AppError(403, "Only 'user' roles can be blocked!");
   }
 
+  if (user.isBlocked === true) {
+    throw new AppError(400, "This user is already blocked and cannot be blocked again.")
+  }
+
   const result = await User.findByIdAndUpdate(userId, payload, {
     new: true,
     runValidators: true,

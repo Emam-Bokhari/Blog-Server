@@ -63,6 +63,9 @@ const blockUserIntoDB = (userId, payload) => __awaiter(void 0, void 0, void 0, f
     if ((user === null || user === void 0 ? void 0 : user.role) !== 'user') {
         throw new AppError_1.AppError(403, "Only 'user' roles can be blocked!");
     }
+    if (user.isBlocked === true) {
+        throw new AppError_1.AppError(400, "This user is already blocked and cannot be blocked again.");
+    }
     const result = yield user_model_1.User.findByIdAndUpdate(userId, payload, {
         new: true,
         runValidators: true,
