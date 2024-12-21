@@ -76,7 +76,14 @@ ACCESS_TOKEN_SECRET=519c5d4a4bcca5ae7ad5e9879d1da60579b991d9c553a128db0e19f97c48
 ACCESS_TOKEN_EXPIRES_IN=30d
 ```
 
-### 5. Run the Application
+### 5. Admin Login Credentials
+
+To access the admin panel, use the following credentials:
+
+- **Email:** `admin@gmail.com`
+- **Password:** `admin123`
+
+### 6. Run the Application
 
 Start the development server:
 
@@ -86,12 +93,12 @@ npm run start:dev
 
 Your application should now be running at `http://localhost:3000`.
 
-### 6. Access the Application
+### 7. Access the Application
 
 - Visit the site in your browser at `http://localhost:3000`.
 - You can now use the application to create, update, delete, and manage blogs based on the user roles.
 
-### 7. Additional Notes
+### 8. Additional Notes
 
 - To access protected routes, use Bearer Tokens for authentication.
 
