@@ -102,6 +102,46 @@ Your application should now be running at `http://localhost:3000`.
 
 - To access protected routes, use Bearer Tokens for authentication.
 
+## ⚙️ Technologies Used
+
+This project is built using technologies that ensure smooth performance and easy development:
+
+### Backend
+
+- **Node.js**: Runtime environment for executing JavaScript server-side.
+- **Express.js**: Web framework for building RESTful APIs.
+- **MongoDB**: NoSQL database for storing data.
+- **Mongoose**: ODM (Object Data Modeling) library for MongoDB.
+- **TypeScript**: Typed superset of JavaScript for maintaining type safety.
+
+### Authentication & Authorization
+
+- **JWT (JSON Web Tokens)**: Secure authentication and user verification.
+- **Bearer Token**: A method of transmitting the JWT in the `Authorization` header to protect routes and ensure only authorized access to APIs.
+
+### Validation
+
+- **Zod**: Schema-based data validation.
+
+### Testing & Development Tools
+
+- **Postman**: API testing and debugging.
+- **Nodemon**: Auto-restarting for development.
+- **ESLint**: Code linting to enforce consistent coding standards.
+- **Prettier**: Code formatter to maintain clean and readable code.
+
+### Deployment
+
+- **Vercel**: For seamless deployment and hosting.
+- **dotenv**: Environment variable management.
+
+### Other Tools
+
+- **bcryptjs**: For hashing passwords securely.
+- **CORS**: Middleware to enable cross-origin resource sharing.
+
+These technologies work together to create a secure, scalable, and user-friendly blogging platform.
+
 ## 📁 Folder Structure
 
 Below is the folder structure for the project:
