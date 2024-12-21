@@ -174,7 +174,7 @@ Below is the folder structure for the project:
 └── etc                                               # Other files (e.g., documentation, package-lock.json etc.)
 ```
 
-## 🧑‍💻 API Endpoints
+## 🤖 💻 API Endpoints
 
 The following API endpoints are available in this project:
 
@@ -195,3 +195,13 @@ The following API endpoints are available in this project:
 - **Admin Only**: Only accessible to admin users.
 - **Blog Owner Only**: Only the owner of the blog can perform this action.
 - **Admin/Owner Only**: Accessible to both admin and the blog owner.
+
+## 📞 Contact
+
+For any inquiries, or suggestions, feel free to reach out:
+
+- **Email**: [moshfiqurrahman37@gmail.com](mailto:moshfiqurrahman37@gmail.com)
+- **GitHub**: [Emam-Bokhari](https://github.com/Emam-Bokhari)
+- **LinkedIn**: [Moshfiqur Rahman](https://www.linkedin.com/in/moshfiqur-rahman-a302b32a3/)
+
+I am always open to feedback ! 😊
