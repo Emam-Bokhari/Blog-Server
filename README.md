@@ -178,16 +178,16 @@ Below is the folder structure for the project:
 
 The following API endpoints are available in this project:
 
-| HTTP Method | Endpoint                         | Description                                 | Access           |
-| ----------- | -------------------------------- | ------------------------------------------- | ---------------- |
-| `POST`      | `/api/auth/register`             | Register a new user                         | Public           |
-| `POST`      | `/api/auth/login`                | Log in and receive a JWT                    | Public           |
-| `GET`       | `/api/blogs`                     | Get all blogs with search, filter, and sort | Public           |
-| `POST`      | `/api/blogs`                     | Create a new blog                           | Logged-in User   |
-| `PATCH`     | `/api/blogs/:id`                 | Update a specific blog                      | Blog Owner Only  |
-| `DELETE`    | `/api/blogs/:id`                 | Delete a specific blog                      | Blog Owner Only  |
-| `PATCH`     | `/api/admin/users/:userId/block` | Block a user                                | Admin Only       |
-| `DELETE`    | `/api/admin/blogs/:id`           | Delete a specific blog                      | Admin/Owner Only |
+| HTTP Method | Endpoint                         | Description                                 | Access          |
+| ----------- | -------------------------------- | ------------------------------------------- | --------------- |
+| `POST`      | `/api/auth/register`             | Register a new user                         | Public          |
+| `POST`      | `/api/auth/login`                | Log in and receive a JWT                    | Public          |
+| `GET`       | `/api/blogs`                     | Get all blogs with search, filter, and sort | Public          |
+| `POST`      | `/api/blogs`                     | Create a new blog                           | Logged-in User  |
+| `PATCH`     | `/api/blogs/:id`                 | Update a specific blog                      | Blog Owner Only |
+| `DELETE`    | `/api/blogs/:id`                 | Delete a specific blog                      | Blog Owner Only |
+| `PATCH`     | `/api/admin/users/:userId/block` | Block a user                                | Admin Only      |
+| `DELETE`    | `/api/admin/blogs/:id`           | Delete a specific blog                      | Admin Only      |
 
 ### Notes
 
