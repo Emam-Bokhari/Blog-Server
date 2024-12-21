@@ -94,3 +94,35 @@ Your application should now be running at `http://localhost:3000`.
 ### 7. Additional Notes
 
 - To access protected routes, use Bearer Tokens for authentication.
+
+## 📁 Folder Structure
+
+Below is the folder structure for the project:
+
+```bash
+├── dist/                                             # Compiled Code
+│   ├── app/
+│   ├── app.js
+│   └── server.js
+├── node_modules/                                     # Project dependencies
+├── src/                                              # Source code
+│   ├── app/                                          # Main application logic
+│   │   ├── builder/
+│   │   ├── config/                                   # Configuration files (e.g., database, JWT, etc.)
+│   │   ├── errors/                                   # Custom error handling classes and utilities
+│   │   ├── interface/                                # TypeScript interfaces and types
+│   │   ├── middleware/                               # Express middleware functions
+│   │   ├── modules/                                  # Feature-specific modules
+│   │   │   ├── blog/                                 # Blog-related logic and components
+│   │   │   └── user/                                 # User-related logic and components
+│   │   ├── routes/                                   # Express routes (API endpoints)
+│   │   ├── utils/
+│   ├── app.ts                                        # Application entry point
+│   └── server.ts                                     # Main server file
+├── .env                                              # Environment variables
+├── .gitignore                                        # Specifies which files should not be tracked by Git
+├── .prettierignore                                   # Prettier configuration to ignore specific files
+├── .prettierrc                                       # Prettier configuration file
+├── .eslint.config.mjs                                # ESLint configuration file
+└── etc                                               # Other files (e.g., documentation, package-lock.json etc.)
+```
