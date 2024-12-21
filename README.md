@@ -5,7 +5,7 @@ This **blog site** is a **dynamic application** designed for **sharing and explo
 ### 🌐 Live Deployment & 🎥 Explanation Video Link
 
 - **Live Site**: [Visit the Deployment](https://blogs-wheat-six.vercel.app)
-- **Video Explanation**: [Watch the Video](https://your-video-link.com)
+- **Video Explanation**: [Watch the Video](https://moshfiqur-rahman-workspace.neetorecord.com/watch/123b9dc7-2b96-4135-be3e-23259ec2abf0)
 
 ## 🔑 Key Features
 

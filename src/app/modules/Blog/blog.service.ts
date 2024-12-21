@@ -45,20 +45,20 @@ const updateBlogIntoDB = async (
   const user = await User.isUserExists(userEmail);
 
   if (!user) {
-    throw new AppError(404, 'User not found!');
+    throw new AppError(403, 'User not found! You cannot update the blog.');
   }
 
   // check blog is exists
   const blog = await Blog.findById(id);
 
   if (!blog) {
-    throw new AppError(404, 'Blog not found!');
+    throw new AppError(404, 'Blog not found! You cannot update it.');
   }
 
   // check the owner
 
   if (blog.author.toString() !== user._id.toString()) {
-    throw new AppError(403, 'You are not authorized to update this blog!');
+    throw new AppError(403, 'You are not the owner of this blog and cannot update it.');
   }
 
   const result = await Blog.findByIdAndUpdate(id, payload, {
@@ -74,7 +74,7 @@ const deleteBlogFromDB = async (id: string, userEmail: string) => {
   const user = await User.isUserExists(userEmail);
 
   if (!user) {
-    throw new AppError(404, 'User not found!');
+    throw new AppError(403, 'User not found! You cannot delete the blog.');
   }
 
   // check blog is exists

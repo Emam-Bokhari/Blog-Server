@@ -41,16 +41,16 @@ const updateBlogIntoDB = (id, userEmail, payload) => __awaiter(void 0, void 0, v
     // check user is exists
     const user = yield user_model_1.User.isUserExists(userEmail);
     if (!user) {
-        throw new AppError_1.AppError(404, 'User not found!');
+        throw new AppError_1.AppError(403, 'User not found! You cannot update the blog.');
     }
     // check blog is exists
     const blog = yield blog_model_1.Blog.findById(id);
     if (!blog) {
-        throw new AppError_1.AppError(404, 'Blog not found!');
+        throw new AppError_1.AppError(404, 'Blog not found! You cannot update it.');
     }
     // check the owner
     if (blog.author.toString() !== user._id.toString()) {
-        throw new AppError_1.AppError(403, 'You are not authorized to update this blog!');
+        throw new AppError_1.AppError(403, 'You are not the owner of this blog and cannot update it.');
     }
     const result = yield blog_model_1.Blog.findByIdAndUpdate(id, payload, {
         new: true,
@@ -62,7 +62,7 @@ const deleteBlogFromDB = (id, userEmail) => __awaiter(void 0, void 0, void 0, fu
     // check user is exists
     const user = yield user_model_1.User.isUserExists(userEmail);
     if (!user) {
-        throw new AppError_1.AppError(404, 'User not found!');
+        throw new AppError_1.AppError(403, 'User not found! You cannot delete the blog.');
     }
     // check blog is exists
     const blog = yield blog_model_1.Blog.findById(id);
